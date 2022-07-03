@@ -1,2 +1,2 @@
 # myflix-back-end-v2
-API REST para criar playlists de videos, separados por categoria.
+A plataforma deve permiti ao usuário montar playlists com links para seus vídeos preferidos, separados por categorias.
