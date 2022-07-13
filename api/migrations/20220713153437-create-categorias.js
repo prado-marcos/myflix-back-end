@@ -21,7 +21,7 @@ module.exports = {
                 type: Sequelize.STRING,
                 validate: {
                     is: /^#([0-9a-f]{3}){1,2}$/i,
-                    msg: `${this} deve estar no formato hexadecimal`,
+                    msg: `${this} deve estar no formato de código hexadecimal`,
                 },
             },
             createdAt: {
