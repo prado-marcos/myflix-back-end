@@ -5,23 +5,23 @@ class Services {
         this.model = model;
     }
 
-    async getById(id) {
+    async acessarPorId(id) {
         return db[this.model].findByPk(id);
     }
 
-    async getAll(where = {}) {
+    async listar(where = {}) {
         return db[this.model].findAll({ where: { ...where } });
     }
 
-    async create(data) {
+    async criar(data) {
         return db[this.model].create(data);
     }
 
-    async update(newData, id) {
+    async atualizar(newData, id) {
         return db[this.model].update(newData, { where: { id: id } });
     }
 
-    async remove(id) {
+    async remover(id) {
         return db[this.model].destroy({ where: { id: id } });
     }
 }
