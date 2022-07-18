@@ -39,6 +39,7 @@ module.exports = {
                     model: "Categorias",
                     key: "id",
                 },
+                defaultValue: 1,
             },
             createdAt: {
                 allowNull: false,
@@ -50,7 +51,7 @@ module.exports = {
             },
         });
     },
-    async down(queryInterface, Sequelize) {
+    async down(queryInterface, _Sequelize) {
         await queryInterface.dropTable("Videos");
     },
 };
