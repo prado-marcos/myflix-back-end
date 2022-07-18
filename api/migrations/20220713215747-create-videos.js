@@ -33,13 +33,12 @@ module.exports = {
                 },
             },
             categoriaId: {
-                allowNull: false,
+                defaultValue: 1,
                 type: Sequelize.INTEGER,
                 references: {
                     model: "Categorias",
                     key: "id",
                 },
-                defaultValue: 1,
             },
             createdAt: {
                 allowNull: false,
