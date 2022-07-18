@@ -1,8 +1,21 @@
 const Services = require("./Services.js");
+const db = require("../models");
 
 class VideosServices extends Services {
-    constructor(){
-        super("Videos")
+    constructor() {
+        super("Videos");
+    }
+
+    async listarPorCategoria(id) {
+        return db[this.model].findAll({
+            where: { categoriaId: Number(id) },
+        });
+    }
+
+    async acessaPorTitulo(titulo) {
+        return db[this.model].findOne({
+            where: { titulo: String(titulo) },
+        });
     }
 }
 
