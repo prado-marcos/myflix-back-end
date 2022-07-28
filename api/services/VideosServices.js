@@ -1,9 +1,9 @@
-const Services = require("./Services.js");
-const db = require("../models");
+const Services = require('./Services.js');
+const db = require('../models');
 
 class VideosServices extends Services {
     constructor() {
-        super("Videos");
+        super('Videos');
     }
 
     async listarPorCategoria(id) {

@@ -1,5 +1,5 @@
-const VideosServices = require("./VideosServices.js");
-const CategoriasServices = require("./CategoriasServices.js");
+const VideosServices = require('./VideosServices.js');
+const CategoriasServices = require('./CategoriasServices.js');
 
 module.exports = {
     VideosServices,
