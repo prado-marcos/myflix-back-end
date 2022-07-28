@@ -1,4 +1,4 @@
-const { VideosServices } = require("../services");
+const { VideosServices } = require('../services');
 const videosServices = new VideosServices();
 
 class VideoController {
@@ -6,7 +6,7 @@ class VideoController {
         try {
             const videos = await videosServices.listar();
             if (videos.length === 0) {
-                return res.status(200).json({ message: "Não há nenhum vídeo" });
+                return res.status(200).json({ message: 'Não há nenhum vídeo' });
             }
             return res.status(200).json(videos);
         } catch (error) {
@@ -19,7 +19,7 @@ class VideoController {
         try {
             const videos = await videosServices.listarPorCategoria(id);
             if (videos.length === 0) {
-                return res.status(200).json({ message: "Não há nenhum vídeo" });
+                return res.status(200).json({ message: 'Não há nenhum vídeo' });
             }
             return res.status(200).json(videos);
         } catch (error) {
@@ -31,11 +31,10 @@ class VideoController {
         const { id } = req.params;
         try {
             const video = await videosServices.acessarPorId(Number(id));
-            if (video) {
-                return res.status(200).json(video);
-            } else {
-                throw new Error("Vídeo não encontrado");
+            if (!video) {
+                throw new Error('Vídeo não encontrado');
             }
+            return res.status(200).json(video);
         } catch (error) {
             res.status(404).json(error.message);
         }
@@ -45,11 +44,10 @@ class VideoController {
         const { search } = req.query;
         try {
             const video = await videosServices.acessarPorTitulo(String(search));
-            if (video) {
-                return res.status(200).json(video);
-            } else {
-                throw new Error("Vídeo não encontrado");
+            if (!video) {
+                throw new Error('Vídeo não encontrado');
             }
+            return res.status(200).json(video);
         } catch (error) {
             res.status(404).json(error.message);
         }
@@ -59,11 +57,10 @@ class VideoController {
         const video = req.body;
         try {
             const novoVideo = await videosServices.criar(video);
-            if (novoVideo) {
-                return res.status(200).json(novoVideo);
-            } else {
-                throw new Error("Não foi possível cadastar o vídeo");
+            if (!novoVideo) {
+                throw new Error('Não foi possível cadastar o vídeo');
             }
+            return res.status(200).json(novoVideo);
         } catch (error) {
             res.status(500).json(error.message);
         }
@@ -77,13 +74,12 @@ class VideoController {
                 novosDados,
                 Number(id)
             );
-            if (videoAtualizado) {
-                return res
-                    .status(200)
-                    .json({ message: "Atualização feita com sucesso" });
-            } else {
-                throw new Error("Não foi possível atualizar o vídeo");
+            if (!videoAtualizado) {
+                throw new Error('Não foi possível atualizar o vídeo');
             }
+            return res
+                .status(200)
+                .json({ message: 'Atualização feita com sucesso' });
         } catch (error) {
             res.status(500).json(error.message);
         }
@@ -93,13 +89,12 @@ class VideoController {
         const { id } = req.params;
         try {
             const videoRemovido = await videosServices.remover(Number(id));
-            if (videoRemovido) {
-                return res
-                    .status(200)
-                    .json({ message: "Exclusão feita com sucesso" });
-            } else {
-                throw new Error("Não foi possível remover o vídeo");
+            if (!videoRemovido) {
+                throw new Error('Não foi possível remover o vídeo');
             }
+            return res
+                .status(200)
+                .json({ message: 'Exclusão feita com sucesso' });
         } catch (error) {
             res.status(500).json(error.message);
         }

@@ -1,4 +1,4 @@
-const { CategoriasServices } = require("../services");
+const { CategoriasServices } = require('../services');
 const categoriasServices = new CategoriasServices();
 
 class CategoriaController {
@@ -8,7 +8,7 @@ class CategoriaController {
             if (categorias.length === 0) {
                 return res
                     .status(200)
-                    .json({ message: "Não há nenhuma categoria" });
+                    .json({ message: 'Não há nenhuma categoria' });
             }
             return res.status(200).json(categorias);
         } catch (error) {
@@ -20,11 +20,10 @@ class CategoriaController {
         const { id } = req.params;
         try {
             const categoria = await categoriasServices.acessarPorId(Number(id));
-            if (categoria) {
-                return res.status(200).json(categoria);
-            } else {
-                throw new Error("Categoria não encontrada");
+            if (!categoria) {
+                throw new Error('Categoria não encontrada');
             }
+            return res.status(200).json(categoria);
         } catch (error) {
             res.status(404).json(error.message);
         }
@@ -34,11 +33,13 @@ class CategoriaController {
         const categoria = req.body;
         try {
             const novaCategoria = await categoriasServices.criar(categoria);
-            if (novaCategoria) {
-                return res.status(200).json(novaCategoria);
-            } else {
-                throw new Error("Não foi possível cadastar a categoria");
+            if (!novaCategoria) {
+                throw new Error('Não foi possível cadastar a categoria');
             }
+            return res.status(200).json({
+                message: 'Categoria cadastrada com sucesso',
+                novaCategoria: novaCategoria,
+            });
         } catch (error) {
             res.status(500).json(error.message);
         }
@@ -52,13 +53,12 @@ class CategoriaController {
                 novosDados,
                 Number(id)
             );
-            if (categoriaAtualizada) {
-                return res
-                    .status(200)
-                    .json({ message: "Atualização feita com sucesso" });
-            } else {
-                throw new Error("Não foi possível atualizar a categoria");
+            if (!categoriaAtualizada) {
+                throw new Error('Não foi possível atualizar a categoria');
             }
+            return res
+                .status(200)
+                .json({ message: 'Atualização feita com sucesso' });
         } catch (error) {
             res.status(500).json(error.message);
         }
@@ -70,13 +70,12 @@ class CategoriaController {
             const categoriaRemovida = await categoriasServices.remover(
                 Number(id)
             );
-            if (categoriaRemovida) {
-                return res
-                    .status(200)
-                    .json({ message: "Exclusão feita com sucesso" });
-            } else {
-                throw new Error("Não foi possível remover a categoria");
+            if (!categoriaRemovida) {
+                throw new Error('Não foi possível remover a categoria');
             }
+            return res
+                .status(200)
+                .json({ message: 'Exclusão feita com sucesso' });
         } catch (error) {
             res.status(500).json(error.message);
         }
