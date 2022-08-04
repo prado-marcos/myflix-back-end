@@ -12,7 +12,7 @@ class VideosServices extends Services {
         });
     }
 
-    async acessaPorTitulo(titulo) {
+    async acessarPorTitulo(titulo) {
         return db[this.model].findOne({
             where: { titulo: String(titulo) },
         });
