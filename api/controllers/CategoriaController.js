@@ -7,7 +7,7 @@ class CategoriaController {
             const categorias = await categoriasServices.listar();
             if (categorias.length === 0) {
                 return res
-                    .status(200)
+                    .status(204)
                     .json({ message: 'Não há nenhuma categoria' });
             }
             return res.status(200).json(categorias);
