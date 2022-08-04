@@ -6,7 +6,7 @@ class VideoController {
         try {
             const videos = await videosServices.listar();
             if (videos.length === 0) {
-                return res.status(200).json({ message: 'Não há nenhum vídeo' });
+                return res.status(204).json({ message: 'Não há nenhum vídeo' });
             }
             return res.status(200).json(videos);
         } catch (error) {
@@ -41,9 +41,9 @@ class VideoController {
     }
 
     static async acessarVideoPorTitulo(req, res) {
-        const { search } = req.query;
+        const { titulo } = req.query;
         try {
-            const video = await videosServices.acessarPorTitulo(String(search));
+            const video = await videosServices.acessarPorTitulo(String(titulo));
             if (!video) {
                 throw new Error('Vídeo não encontrado');
             }
