@@ -5,7 +5,7 @@ const routes = Router();
 routes
     .get('/videos', VideoController.listarVideos)
     .get('/videos/:id', VideoController.acessarVideoPorId)
-    .get('/videos/', VideoController.acessarVideoPorTitulo)
+    .get('/videos/search', VideoController.acessarVideoPorTitulo)
     .get('/categorias/:id/videos/', VideoController.listarVideosPorCategoria)
     .post('/videos', VideoController.cadastarVideo)
     .put('/videos/:id', VideoController.atualizarVideo)
