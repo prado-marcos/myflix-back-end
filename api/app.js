@@ -1,9 +1,8 @@
 const express = require('express');
-const { videos, categorias } = require('./routes');
+const routes = require('./routes');
 const app = express();
 
 app.use(express.json());
-
-app.use(videos, categorias);
+routes(app);
 
 module.exports = { app };
