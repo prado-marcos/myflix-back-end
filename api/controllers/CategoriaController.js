@@ -2,9 +2,10 @@ const { CategoriasServices } = require('../services');
 const categoriasServices = new CategoriasServices();
 
 class CategoriaController {
-    static async listarCategorias(_req, res) {
+    static async listarCategorias(req, res) {
+        const { page } = req.query;
         try {
-            const categorias = await categoriasServices.listar();
+            const categorias = await categoriasServices.listar({}, page);
             if (categorias.length === 0) {
                 return res
                     .status(204)
