@@ -4,7 +4,7 @@
     "description": "API REST para criar playlists de videos, separados por categoria.",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon ./api/server.js",
+        "start": "nodemon server.js",
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --watch --coverage",
