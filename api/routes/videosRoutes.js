@@ -4,6 +4,7 @@ const routes = Router();
 
 routes
     .get('/videos/search', VideoController.acessarVideoPorTitulo)
+    .get('/videos/free', VideoController.listarVideosSemAutenticacao)
     .get('/videos/:id', VideoController.acessarVideoPorId)
     .get('/videos', VideoController.listarVideos)
     .get('/categorias/:id/videos/', VideoController.listarVideosPorCategoria)
