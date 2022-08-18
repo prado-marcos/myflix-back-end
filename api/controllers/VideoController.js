@@ -19,7 +19,7 @@ class VideoController {
         try {
             const videos = await videosServices.listarPorCategoria(id);
             if (videos.length === 0) {
-                return res.status(200).json({ message: 'Não há nenhum vídeo' });
+                return res.status(204).json({ message: 'Não há nenhum vídeo' });
             }
             return res.status(200).json(videos);
         } catch (error) {
@@ -56,13 +56,19 @@ class VideoController {
     static async cadastarVideo(req, res) {
         const video = req.body;
         try {
+            if (Object.keys(video).length === 0) {
+                throw new Error('O corpo da requisição não pode ser vazio');
+            }
             const novoVideo = await videosServices.criar(video);
             if (!novoVideo) {
                 throw new Error('Não foi possível cadastar o vídeo');
             }
             return res.status(200).json(novoVideo);
         } catch (error) {
-            res.status(500).json(error.message);
+            if (error.message === 'O corpo da requisição não pode ser vazio') {
+                return res.status(400).json(error.message);
+            }
+            return res.status(500).json(error.message);
         }
     }
 
@@ -78,7 +84,7 @@ class VideoController {
                 throw new Error('Não foi possível atualizar o vídeo');
             }
             return res
-                .status(200)
+                .status(204)
                 .json({ message: 'Atualização feita com sucesso' });
         } catch (error) {
             res.status(500).json(error.message);
