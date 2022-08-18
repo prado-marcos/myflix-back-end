@@ -9,8 +9,13 @@ class Services {
         return db[this.model].findByPk(id);
     }
 
-    async listar(where = {}) {
-        return db[this.model].findAll({ where: { ...where } });
+    async listar(where = {}, page) {
+        const limit = 5;
+        return db[this.model].findAll({
+            where: { ...where },
+            limit: limit,
+            offset: limit * page,
+        });
     }
 
     async criar(data) {
