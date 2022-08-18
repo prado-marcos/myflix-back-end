@@ -2,9 +2,10 @@ const { VideosServices } = require('../services');
 const videosServices = new VideosServices();
 
 class VideoController {
-    static async listarVideos(_req, res) {
+    static async listarVideos(req, res) {
+        const { page } = req.query;
         try {
-            const videos = await videosServices.listar();
+            const videos = await videosServices.listar({}, page);
             if (videos.length === 0) {
                 return res.status(204).json({ message: 'Não há nenhum vídeo' });
             }
