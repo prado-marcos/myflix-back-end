@@ -32,6 +32,9 @@ class CategoriaController {
     static async cadastarCategoria(req, res) {
         const categoria = req.body;
         try {
+            if (Object.keys(categoria).length === 0) {
+                throw new Error('O corpo da requisição não pode ser vazio');
+            }
             const novaCategoria = await categoriasServices.criar(categoria);
             if (!novaCategoria) {
                 throw new Error('Não foi possível cadastar a categoria');
@@ -41,7 +44,10 @@ class CategoriaController {
                 novaCategoria: novaCategoria,
             });
         } catch (error) {
-            res.status(500).json(error.message);
+            if (error.message === 'O corpo da requisição não pode ser vazio') {
+                return res.status(400).json(error.message);
+            }
+            return res.status(500).json(error.message);
         }
     }
 
@@ -57,7 +63,7 @@ class CategoriaController {
                 throw new Error('Não foi possível atualizar a categoria');
             }
             return res
-                .status(200)
+                .status(204)
                 .json({ message: 'Atualização feita com sucesso' });
         } catch (error) {
             res.status(500).json(error.message);
