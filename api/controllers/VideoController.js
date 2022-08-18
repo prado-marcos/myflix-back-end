@@ -15,6 +15,18 @@ class VideoController {
         }
     }
 
+    static async listarVideosSemAutenticacao(req, res) {
+        try {
+            const videos = await videosServices.listar({}, 0);
+            if (videos.length === 0) {
+                return res.status(204).json({ message: 'Não há nenhum vídeo' });
+            }
+            return res.status(200).json(videos);
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
+    }
+
     static async listarVideosPorCategoria(req, res) {
         const { id } = req.params;
         try {
