@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 validate: {
                     isUrl: {
-                        msg: 'Formato inválido de ULR',
+                        msg: 'Formato inválido de URL',
                     },
                 },
             },
